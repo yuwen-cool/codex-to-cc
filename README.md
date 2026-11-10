@@ -1,19 +1,19 @@
-# YwRelay
+# Codex to CC
 
 **在 Codex 里，把审查、编码和测试任务交给本机 Claude Code。**
 
 A lightweight Codex skill for delegating review and coding tasks to your local, unmodified Claude Code CLI—with scoped permissions, resumable jobs, and explicit parent verification.
 
-[![Tests](https://github.com/yuwen-cool/ywrelay/actions/workflows/tests.yml/badge.svg)](https://github.com/yuwen-cool/ywrelay/actions/workflows/tests.yml)
+[![Tests](https://github.com/yuwen-cool/codex-to-cc/actions/workflows/tests.yml/badge.svg)](https://github.com/yuwen-cool/codex-to-cc/actions/workflows/tests.yml)
 [![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-YwRelay 是独立开源项目，不隶属 OpenAI 或 Anthropic，也不提供模型服务。首个公开版本为 **v0.1.0（公开预览）**。
+Codex to CC 是独立开源项目，不隶属 OpenAI 或 Anthropic，也不提供模型服务。当前版本为 **v0.1.1（公开预览）**。
 
 ## 用一句话开始
 
 安装后，对 Codex 说：
 
-| 你说 | YwRelay 帮你做什么 |
+| 你说 | Codex to CC 帮你做什么 |
 |---|---|
 | “让 Claude 审查当前分支相对 main 的改动。” | 取共同祖先到 HEAD 的差异，进行只读审查 |
 | “请 Opus 看看这个方案有哪些遗漏。” | 在独立会话中给出第二意见 |
@@ -42,26 +42,28 @@ YwRelay 是独立开源项目，不隶属 OpenAI 或 Anthropic，也不提供模
 
 最方便的方式，把这句话交给 Codex：
 
-> 请从 https://github.com/yuwen-cool/ywrelay 安装 v0.1.0 的 skills/ywrelay。先读 README 和 SKILL.md，使用已有的 Skill 安装器，不修改 Claude 的全局配置。
+> 请从 https://github.com/yuwen-cool/codex-to-cc 安装 v0.1.1 的 skills/codex-to-cc。先读 README 和 SKILL.md，使用已有的 Skill 安装器，不修改 Claude 的全局配置。
 
 如果你的 Codex 带有官方 Skill 安装器，也可以执行：
 
 ```bash
 python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-installer/scripts/install-skill-from-github.py" \
-  --repo yuwen-cool/ywrelay --path skills/ywrelay --ref v0.1.0
+  --repo yuwen-cool/codex-to-cc --path skills/codex-to-cc --ref v0.1.1
 ```
 
-已存在同名 Skill 时安装器会停止，避免覆盖。手动安装可下载 [Release](https://github.com/yuwen-cool/ywrelay/releases/tag/v0.1.0) 的 Skill ZIP，将其中的 `ywrelay` 文件夹放到 `${CODEX_HOME:-~/.codex}/skills/`；升级前先备份旧目录。Skill 在后续新一轮对话中可发现。
+已存在同名 Skill 时安装器会停止，避免覆盖。手动安装可下载 [Release](https://github.com/yuwen-cool/codex-to-cc/releases/tag/v0.1.1) 的 Skill ZIP，将其中的 `codex-to-cc` 文件夹放到 `${CODEX_HOME:-~/.codex}/skills/`；升级前先备份旧目录。Skill 在后续新一轮对话中可发现。
 
 本机已有 Claude Code 登录态时直接复用。尚未登录的用户需自行完成官方 CLI 登录；也支持用户自己配置的官方 `ANTHROPIC_API_KEY`。工具开源不等于模型用量免费，用量遵守你自己的账户协议和额度。
 
 安装后检查：
 
 ```bash
-python3 "${CODEX_HOME:-$HOME/.codex}/skills/ywrelay/scripts/jobs.py" doctor
+python3 "${CODEX_HOME:-$HOME/.codex}/skills/codex-to-cc/scripts/jobs.py" doctor
 ```
 
 `doctor` 不启动登录、不直接读取或导出凭据文件、不输出邮箱；它检查配置，不能替代一次真实任务。
+
+从旧版 `ywrelay` 升级：先备份旧 Skill（包括自定义 `config.json`），安装 `codex-to-cc` 后停用旧目录，避免重复触发。历史任务仍在同一 `claude-jobs` 目录，无需迁移。`v0.1.0` 保留为历史版本。
 
 ## 权限与默认模型
 
@@ -79,7 +81,7 @@ python3 "${CODEX_HOME:-$HOME/.codex}/skills/ywrelay/scripts/jobs.py" doctor
 日常由 Codex 按 Skill 操作即可。需要手动调用时：
 
 ```bash
-skill_dir="${CODEX_HOME:-$HOME/.codex}/skills/ywrelay"
+skill_dir="${CODEX_HOME:-$HOME/.codex}/skills/codex-to-cc"
 
 # 将任务说明保存在项目外的文件；命令返回 job_id。
 python3 "$skill_dir/scripts/jobs.py" run \
@@ -93,7 +95,7 @@ python3 "$skill_dir/scripts/jobs.py" result \
   --cwd /absolute/path/to/project --owner terminal --job <job_id>
 ```
 
-“改代码并测试”使用 `--mode execute`。从只读切换为执行需要新建任务，不能提升原会话的权限。完整使用说明见 [SKILL.md](skills/ywrelay/SKILL.md)，恢复与隔离见 [任务管理](skills/ywrelay/references/management.md)。
+“改代码并测试”使用 `--mode execute`。从只读切换为执行需要新建任务，不能提升原会话的权限。完整使用说明见 [SKILL.md](skills/codex-to-cc/SKILL.md)，恢复与隔离见 [任务管理](skills/codex-to-cc/references/management.md)。
 
 ## 已验证与限制
 
@@ -108,12 +110,12 @@ python3 "$skill_dir/scripts/jobs.py" result \
 
 辅助脚本本身没有服务端或遥测。任务记录默认保存在 `${CODEX_HOME:-~/.codex}/claude-jobs`，目录 0700、文件 0600。目录名和 JSON schema 保留内部版本的名称以兼容历史任务；这不是另一项服务。
 
-代码与提示会通过官方 CLI 发送给 Anthropic，遵守用户所选账户的条款和数据政策。YwRelay 不提取／转发订阅 token，不管理用户的账户，不代理共享额度，不修改 CLI 二进制。对外名称和 logo 不使用供应商品牌；兼容性与使用边界见 [官方依据](skills/ywrelay/references/compliance.md)。
+代码与提示会通过官方 CLI 发送给 Anthropic，遵守用户所选账户的条款和数据政策。Codex to CC 不提取／转发订阅 token，不管理用户的账户，不代理共享额度，不修改 CLI 二进制。项目名称说明调用方向，不使用供应商 logo、不暗示官方背书；兼容性与使用边界见 [官方依据](skills/codex-to-cc/references/compliance.md)。
 
 ## 开发与反馈
 
 ```bash
-python3 -m unittest discover -s skills/ywrelay/tests -v
+python3 -m unittest discover -s skills/codex-to-cc/tests -v
 ```
 
 提交问题时提供操作系统、Python 与 Claude Code 版本、脱敏后的命令和失败状态。修改保持小范围，并给具体修复补充测试。请勿上传任务存储目录、凭据或私人代码。

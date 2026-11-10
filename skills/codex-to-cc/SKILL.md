@@ -1,9 +1,9 @@
 ---
-name: ywrelay
+name: codex-to-cc
 description: 通过本机官方 Claude Code 获取独立审查、方案评估，或执行已授权的编码与测试任务，支持续接、后台进度、历史与取消。用于“让 Claude review”“请 Opus 看看”“交给 Claude 修复并测试”“查看/停止 Claude 任务”或已授权的跨模型协作；不用于未指定 Claude 的普通编码/审查、Claude 产品调研或账号管理。
 ---
 
-# YwRelay
+# Codex to CC
 
 在 Codex 中通过本机未经修改的官方 Claude Code CLI 委派任务。独立开源项目，不隶属 OpenAI 或 Anthropic。主 Agent 负责划定任务、核实发现与验收修改；`claude mcp serve` 的工具暴露不等于模型会话。调用与权限机制已实测，尚无对照证据证明它稳定提高审查或编码质量。
 

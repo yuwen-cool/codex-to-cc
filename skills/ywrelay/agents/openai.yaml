@@ -1,4 +1,0 @@
-interface:
-  display_name: "YwRelay"
-  short_description: "调用 Claude 审查与编码测试，续接任务并管理后台进度、结果和取消"
-  default_prompt: "使用 $ywrelay 请 Claude 独立审查当前改动，核实问题后再处理。"

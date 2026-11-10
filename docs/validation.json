@@ -1,13 +1,13 @@
 {
   "date": "2026-11-10",
-  "release": "v0.1.0",
-  "basis": "Internal v5, renamed and packaged for public distribution; additional secret-store path exclusions",
+  "release": "v0.1.1",
+  "basis": "Renamed from YwRelay v0.1.0; runtime scripts and default configuration are byte-identical.",
   "tests": {
     "count": 52,
     "passed": true,
     "failures": 0,
     "errors": 0,
-    "seconds": 22.79,
+    "seconds": 23.312,
     "uses_real_model": false
   },
   "previous_live_evidence": {
@@ -49,5 +49,11 @@
     "gitleaks": "8.30.1; no leaks found",
     "personal_paths_and_identifiers": "no findings",
     "local_document_links": "passed"
+  },
+  "rename_validation": {
+    "skill_frontmatter": "passed",
+    "doc_links": "passed",
+    "runtime_scripts_unchanged": true,
+    "default_configuration_unchanged": true
   }
 }

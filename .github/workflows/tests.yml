@@ -22,4 +22,4 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Run offline unit and subprocess tests
-        run: python -m unittest discover -s skills/ywrelay/tests -v
+        run: python -m unittest discover -s skills/codex-to-cc/tests -v
