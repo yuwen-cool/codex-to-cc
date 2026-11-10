@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-10",
+  "release": "v0.1.0",
+  "basis": "Internal v5, renamed and packaged for public distribution; additional secret-store path exclusions",
+  "tests": {
+    "count": 52,
+    "passed": true,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 22.79,
+    "uses_real_model": false
+  },
+  "previous_live_evidence": {
+    "date": "2026-11-07",
+    "platform": "macOS",
+    "cli": "2.1.311",
+    "observed_model": "claude-opus-5-5",
+    "requested_effort": "high",
+    "execute_parent_tests_passed": 4,
+    "execute_parent_tests_total": 4,
+    "unrelated_dirty_changes_preserved": true,
+    "branch_review_seeded_bug_reproduced": true,
+    "same_native_session_resume_verified": true
+  },
+  "limitations": [
+    "Synthetic fixtures do not prove production-wide reliability or a quality advantage over other tools.",
+    "Only macOS has real CLI/sandbox invocation evidence; CI uses synthetic CLI processes.",
+    "No independently observable backend effort level; high is the submitted setting."
+  ],
+  "release_live_smoke": {
+    "date": "2026-11-10",
+    "platform": "macOS",
+    "cli": "2.1.311",
+    "mode": "execute",
+    "observed_models": [
+      "claude-opus-5-5"
+    ],
+    "requested_effort": "high",
+    "status": "completed",
+    "parent_test_command": "python3 -m unittest -v",
+    "parent_exit_code": 0,
+    "parent_tests_passed": 3,
+    "parent_tests_total": 3,
+    "unrelated_dirty_change_preserved": true,
+    "tests_and_gitignore_unchanged": true
+  },
+  "release_checks": {
+    "skill_validator": "passed",
+    "gitleaks": "8.30.1; no leaks found",
+    "personal_paths_and_identifiers": "no findings",
+    "local_document_links": "passed"
+  }
+}
